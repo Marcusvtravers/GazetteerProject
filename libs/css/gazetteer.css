@@ -46,12 +46,11 @@ div{
     z-index: 1;
     width: 23%;
     font-family: 'Cairo', sans-serif;
-    right: 4%;
-    
+    right: 5%;
     margin-top: 1%;
-    min-width: 300px;
+    min-width: 250px;
+} 
 
-}
 
 #map{
    height: 100%;
@@ -105,6 +104,4 @@ div{
 #recoveredCovid{
     color: rgb(81, 148, 81)
 }
-
-
 

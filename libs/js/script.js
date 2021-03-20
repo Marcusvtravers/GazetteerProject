@@ -187,6 +187,9 @@ var holidaybtn = L.easyButton('<i class="fas fa-umbrella-beach"></i>', function(
   }
 }).addTo(map);
 
+
+
+
 /*holidaybtn.button.style.height = '35px';
 holidaybtn.button.style.width = '35px';*/
 holidaybtn.button.style.backgroundColor = '#198754';
