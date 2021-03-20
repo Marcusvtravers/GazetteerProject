@@ -134,6 +134,7 @@ var zoomin = L.easyButton('<i class="fa fa-search-plus">',function(btn, map){
 zoomin.button.style.width = '35px';*/
 zoomin.button.style.backgroundColor = '#198754';
 
+
 var zoomout = L.easyButton('<i class="fa fa-search-minus">',function(btn, map){
   map.setZoom(map.getZoom() - 1)
 }).addTo(map);
