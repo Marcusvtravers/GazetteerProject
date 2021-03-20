@@ -25,7 +25,7 @@
 	$output['data']['country'] = $decode['results'][0]['components']['country'];
 	$output['data']['countrycode'] = $decode['results'][0]['components']['country_code'];
 
-	//$output['data'] = $decode;
+
 	header('Content-Type: application/json; charset=UTF-8');
 
 	echo json_encode($output); 
