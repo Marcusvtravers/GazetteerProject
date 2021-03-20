@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gazetter</title>
+    <link rel="stylesheet" href="leaflet/leaflet.css"/>
+    <script src="leaflet/leaflet.js"></script>
+  
+   <link rel="stylesheet" href="./libs/css/gazetteer.css" type="text/css" >
+  <link rel="stylesheet" href="libs/css/bootstrap.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image.png" href="icons/icons8-globe-earth-16.png">
+<link rel="stylesheet" href="node_modules/leaflet-easybutton/src/easy-button.css">
+<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+<link rel="stylesheet" href="img/leaflet.extra-markers.min.css">
+<link rel="stylesheet" href="dist/MarkerCluster.css">
+<link rel="stylesheet" href="dist/MarkerCluster.Default.css">
+</head>
+<body>
+
+
+<!-- This is the country information modal-->
+  <div class="modal fade" id="countryInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h2 class="modal-title" id="exampleModalLabel"><img src="" class=flagurl><span class="txtcountry"></span></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+      
+        <table class="table ">
+     
+          <tr>
+            <td>Capital</td>
+            <td class='ti'><span class=txtcapital></span></td>
+          </tr>
+          <tr>
+            <td>Continent</td>
+            <td class='ti'><span class=continent></span></td>
+          </tr>
+          <tr>
+            <td>Iso Codes</td>
+            <td class='ti'><span class=countryCode></span> - <span class="isoAlpha3"></span></td>
+          </tr>
+          <tr>
+            <td>GMT Offset</td>
+            <td class='ti'><span class="txtgmtoffsetformodal"></span></td>
+          </tr>
+     
+          <tr>
+            <td>Population</td>
+            <td class='ti'><span id=txtpopulation></span></td>
+          </tr>
+          <tr>
+            <td>Area</td>
+            <td class='ti'><span id=txtarea></span>km<sup>2</sup></td>
+          </tr>
+          <tr>
+            <td>Language</td>
+            <td class='ti'><span id="language"></td>
+          </tr>
+          <tr>
+            <td>Demonym</td>
+            <td class='ti'><span id=demonym></span></td>
+          </tr>
+          <tr>
+          <td class="wikitd" colspan="2"><a href=https://en.wikipedia.org/wiki/ id="link2" target=_blank >Wikipedia Link</a></td>
+        </tr>
+      </table>
+    </br>
+      <table class="table">
+         
+            <th colspan="2">Exchange rates</th>
+        <tbody>
+     
+          <tr>
+            <td>Currency</td>
+            <td class="ti"><span id=txtcurrency></span></td>
+          </tr>
+          <tr>
+            <td>$1 = </td>
+            <td class="ti"><span class=currencysymbol></span><span id=currencyToDollar></span></td>
+          </tr>
+          <tr>
+            <td>€1 = </td>
+            <td class="ti"><span class=currencysymbol></span><span id=currencyToEuro></td>
+          </tr>
+        </tbody>
+        </table>
+  
+      </br>
+      <table class="table " id="neighbourTable">
+         <th colspan="2">
+          Neighbouring Countries
+         </th>
+         <tbody id="bordertable" class="table table-light table-striped">
+  
+         
+         </tbody>
+       </table>
+      
+        </div>
+        <div class="modal-footer bg-success">
+          <button type="button" class="btn btn-light text-black" data-bs-dismiss="modal">Close</button>
+  
+        </div>
+      </div>
+    </div>
+  </div>         
+
+      <!--This is the weather modal-->  
+  <div class="modal fade" id="weatherInfo" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h2 class="modal-title" id="exampleModalLabel"><img src="" class=flagurl  ><span class="txtcountry"></span></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+      
+        </br>
+        <table class="table borderless">
+          
+          
+            <tr>
+              <td rowspan="2" style="text-align: center;"><img src="" class="weathericon"></td>
+              
+             <td><span class=txtcapital></span> GMT <span class="txtgmtoffsetformodal"></span></td><td><img src="icons/iconfinder_10_171505time.png"><span class="txttimeformodal"></span></td></tr>
+            <tr><td><span class=weatherdescdiv></span> </td><td><span id="tempmaxdiv" style="font-size: 1.4em;"></span>&#176/<span id="tempmindiv" style="font-size: 0.8em;"></span>&#176</td></tr>
+            <tr>
+              <td rowspan="2" style="text-align: center;"><h1><span id="txttemperaturediv"></span>&#176C</h1></td>
+
+            <td><img src="icons/iconfinder_weather-07_1530387sunrise.png"><span class="txtsunriseformodal"></span></td><td><img src="icons/iconfinder_weather-09_1530384sunset.png"><span class="txtsunsetformodal"></span><td></tr>
+            <tr><td><img src="icons/iconfinder_Windy_3741354wind.png"><span id="windspeeddiv"></span> mph</td></td><td><img src="icons/iconfinder_weather_44_2682807humidity.png"><span class="txthumiditydiv"></span>%</td></tr>
+  </table>
+  </div>
+  <div class="modal-footer bg-success">
+    <button type="button" class="btn btn-light text-black" data-bs-dismiss="modal">Close</button>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+      
+
+  <!-- This is the news modal-->
+<div class="modal fade" id="newsInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="exampleModalLabel"><img src="" class=flagurl  ><span class="txtcountry"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        </button>
+      </div>
+        <div class="modal-body" >
+          
+            <h2>News</h2>
+      
+      </br>
+          <div  id="containerNewsInfo" >
+          </div>      
+        </div>
+        <div class="modal-footer bg-success">
+          <button type="button" class="btn btn-light text-black" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--This is the holiday modal-->
+  <div class="modal fade" id="holidayInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h2 class="modal-title" id="exampleModalLabel"><img src="" class=flagurl><span class="txtcountry"></span></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+          </button>
+        </div>
+          <div class="modal-body">
+          </br>
+            <table class="table table-light table-striped" >
+              <thead>
+                <tr>
+                  <th scope="col">National Holiday</th>
+                  <th scope="col">Date</th> 
+                </tr>      
+              </thead>
+              <tbody id="holidayTable">
+             
+              </tbody>
+            </table>
+
+            <div id="containerHolidayInfo">
+  
+            </div>
+          </div>
+          <div class="modal-footer bg-success">
+            <button type="button" class="btn btn-light text-black" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- This is the covid modal -->
+<div class="modal fade" id="covidInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h2 class="modal-title" id="exampleModalLabel"><img src="" class=flagurl><span class="txtcountry"></span></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modal-covid">
+
+        <h2>Covid 19</h2>
+      </br>
+        <div class="covidData">
+        <p>Confirmed Cases </br><span id=confirmedCovid></span>
+        </br>
+        </br>Deaths </br><span id=deathsCovid ></span></br>
+        </br>Critical</br><span id=criticalCovid ></span></br>
+          
+        </br>Recovered</br> <span id=recoveredCovid></span></p>  
+      </div>
+      <table class="table" id="covidtable">
+        <tr>
+          <td>Cases per Million:</td> 
+          <td><span id=covidCasesPerMil></td>
+        </tr>
+        <tr>
+          <td>Death rate:</td>
+          <td><span id=deathRateCovid></span></td>
+          </tr>
+        </tr>
+        <tr>
+          <td>Recovery rate: </td>
+          <td><span id=recoveryRateCovid></span></td>
+        </tr>
+      
+      </table>
+        <h3>Today</h3>
+      <p>Cases: <span id=todayConfirmedCovid></span> - <span>Deaths: <span id=todayDeathsCovid></span></p>
+      <p>Updated at <span id=updatedAt></span></p>
+    </div>
+      <div class="modal-footer bg-success">
+        <button type="button" class="btn btn-light text-black" data-bs-dismiss="modal">Close</button>
+      </div>
+     
+
+     
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="alert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">No Country Selected</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        </button>
+      </div>
+        <div class="modal-body">
+     <p>Please select a country from the search bar</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <select class=form-select arial-label="Default select example" id="countryselect">
+    <option disabled selected value>Select a country</option>
+  </select>
+
+<div id="map" > 
+
+
+
+ </div>
+
+
+    
+
+</body>
+<script src="./node_modules/leaflet-easybutton/src/easy-button.js"></script>
+<script src="./leaflet.extra-markers.min.js"></script>
+<script src="./dist/leaflet.markercluster.js"></script>
+<script src="./node_modules/jquery/dist/jquery.js"></script>
+<script src="./libs/js/bootstrap.bundle.js"></script>
+<script src="./libs/js/script.js"></script>
+</html>
+

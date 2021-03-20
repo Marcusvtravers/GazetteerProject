@@ -1,0 +1,113 @@
+
+
+html ,body{ 
+    height: 100%;
+    background-color: rgba(110, 153, 90, 0.705);
+    font-family: 'Cairo', sans-serif;
+ }
+/*
+.backButton{
+    background-color: rgb(203, 206, 157);
+    height: 100%;
+    width: 100%;
+    display: inline-block
+}
+*/
+
+
+
+
+.fa-info, .fa-virus, .fa-search-plus, .fa-search-minus {
+font-size: 18px;
+margin-top: 5px;
+color: white;
+
+}
+.fa-cloud-sun, .fa-umbrella-beach, .fa-newspaper {
+    margin-top:4px;
+    font-size:16px;
+color:white;
+}
+
+nav{
+   
+    display: inline-block;
+    padding: 30px;
+    font-family: 'Cairo', sans-serif;
+}
+
+div{
+    font-family: 'Cairo', sans-serif;
+}
+
+#btnContainer {
+  display: inline;
+ 
+  
+}
+
+#countryselect{
+    position: absolute;
+    z-index: 1;
+    width: 30%;
+    font-family: 'Cairo', sans-serif;
+    right: 10%;
+    margin-top: 1%;
+    min-width: 300px;
+}
+
+#map{
+   height: 100%;
+   z-index: 0;
+   position: relative;
+}
+
+.countryneighbour{
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.borderless td, .borderless th, .borderless {
+ border: none;
+}
+
+
+.modal-body th, .wikitd, #modal-covid{
+    text-align: center;
+}
+.modal-body .ti{
+    text-align: end;
+}
+
+.modal-title .txtcountry{
+    margin-left: 10px;
+}
+
+.flagurl{
+    height:10%;
+    width:15%;
+    border:1px solid lightgray;
+}
+
+#covidtable {
+    text-align: left;
+}
+
+.covidData{
+    font-size: 1.3em;
+}
+
+#deathsCovid{
+  
+    color: rgb(177, 31, 31)
+}
+#criticalCovid{
+    color: rgb(182, 180, 180)
+}
+
+#recoveredCovid{
+    color: rgb(81, 148, 81)
+}
+
+
+
