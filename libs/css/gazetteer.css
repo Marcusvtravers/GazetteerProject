@@ -29,12 +29,7 @@ color: white;
 color:white;
 }
 
-nav{
-   
-    display: inline-block;
-    padding: 30px;
-    font-family: 'Cairo', sans-serif;
-}
+
 
 div{
     font-family: 'Cairo', sans-serif;
@@ -54,6 +49,7 @@ div{
     right: 10%;
     margin-top: 1%;
     min-width: 300px;
+    margin-left: 10%;
 }
 
 #map{
