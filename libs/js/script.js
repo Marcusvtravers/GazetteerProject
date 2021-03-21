@@ -420,14 +420,17 @@ $('#countryselect').change(function(){
                       
                     })
                   
-                               
+                             /*  commented out because I run out of monthly api requests
                       //AJAX call for the currency exhange from a given country to Euros
                     $.ajax({
                       url: 'libs/php/getEuroCurrency.php',
                       type: 'POST',
-                      data: 'JSON',
+                      dataType: 'JSON',
+                      data: {
+                        currency: currencycode
+                      },
                       success: function(result){
-                     
+                        console.log(result)
                         const currency = result.data[currencycode]
                     
                         //Attaching and removinng the given currency when a new currency is clicked
@@ -442,7 +445,7 @@ $('#countryselect').change(function(){
                           console.log(error)
                         }
                       })    
-                      
+                      */
                       
 
                     //AJAX call for the getWeather API 
