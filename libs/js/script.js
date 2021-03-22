@@ -68,9 +68,11 @@ function success(pos) {
     },
     dataType: 'json',
     success:function(res){
-      
       const countrycode = res.data.countrycode.toUpperCase();
       $('#countryselect').val(countrycode).change();
+      /*
+
+     
       const road = res.data.road;
       const city = res.data.city;
       const country = res.data.country;
@@ -83,7 +85,7 @@ function success(pos) {
       var latLngs = [marker.getLatLng()];
       var markerBounds = L.latLngBounds(latLngs)
       map.flyToBounds(map.fitBounds(markerBounds,{maxZoom: 6})) 
-      
+      */
     }
   })
 }
