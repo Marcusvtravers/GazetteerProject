@@ -25,7 +25,7 @@
 
 <!-- This is the country information modal-->
   <div class="modal fade" id="countryInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header bg-success text-white">
           <h2 class="modal-title" id="exampleModalLabel"><img src="" class=flagurl><span class="txtcountry"></span></h2>
@@ -68,9 +68,6 @@
             <td>Demonym</td>
             <td class='ti'><span id=demonym></span></td>
           </tr>
-          <tr>
-          <td class="wikitd" colspan="2"><a href=https://en.wikipedia.org/wiki/ id="link2" target=_blank >Wikipedia Link</a></td>
-        </tr>
       </table>
     </br>
       <table class="table">
@@ -104,7 +101,18 @@
          
          </tbody>
        </table>
-      
+      </br>
+      <table class="table">
+  
+          <th>
+            Wikipedia
+          </th>
+          <tbody>
+          <tr>
+          <td class="wikitd"><iframe src='' style="width:100%; height: 500px;" id="link2" target=_blank ></iframe></td>
+    </tr>
+  </tbody>
+      </table>
         </div>
         <div class="modal-footer bg-success">
           <button type="button" class="btn btn-light text-black" data-bs-dismiss="modal">Close</button>

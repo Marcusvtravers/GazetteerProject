@@ -18,7 +18,8 @@
 		for ($y = 0; $y < $length; $y++ ){
 		$valborder = $decode['features'][$y]['properties']['iso_a3'];
 		if($border1 === $valborder){
-			$border = $decode['features'][$y]['properties']['iso_a3'];
+			$border['iso_a3'] = $decode['features'][$y]['properties']['iso_a3'];
+			$border['name'] = $decode['features'][$y]['properties']['name'];
 			array_push($final, $border);
 		}
 	}
@@ -30,6 +31,7 @@
 	$output['status']['description'] = "mission saved";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
 	$output['data'] = $final;
+	
 
 
 

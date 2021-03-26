@@ -307,7 +307,11 @@ $('#countryselect').change(function(){
               success: function(result){  
                 
                 const capital = result.data.capital;
-            
+                const country = result.data.country;
+                let countryWiki = country.split(" ").join("_")
+                const wiki = 'https://en.wikipedia.org/wiki/';
+                const wikis =  wiki + countryWiki;
+                console.log(wikis)
                 $('.txtcountry').html(result['data']['country'])
                 $('.txtcapital').html(result['data']['capital'])
                 $('.txtpopulation').html(result['data']['population'])
@@ -316,6 +320,7 @@ $('#countryselect').change(function(){
                 $("#txtpopulation").html(result["data"]["population"]);
                 $("#txtarea").html(result["data"]["area"]);
                 $(".continent").html(result['data']['continent'])
+                $('#link2').attr('src',wikis)
 
 
                 let alpha3 = result.data.iso_a3
@@ -331,7 +336,7 @@ $('#countryselect').change(function(){
                     countrycode: alpha3lower
                   },
                   success: function(result){
-                    
+                    console.log(result)
                     let flagurl = result.data.flag
                     const currencycode = result.data.currency_code; 
                     $(".currencysymbol").html(result["currency_symbol"])
@@ -342,7 +347,20 @@ $('#countryselect').change(function(){
                     $("#borders").html(result["data"]["borders"])
                     $("#subregion").html(result["data"]["subregion"])
                     let borders = result.data.borders;
-            
+                    
+                    if (borders.length === 0){
+                      
+                      var table = document.getElementById('bordertable')
+                      
+                      var row = `<tr>
+                      <td colspan="2" style="text-align: center">There are no neighbouring countries for this country</td>
+                     </tr>`
+                     table.innerHTML = row;
+                     
+                    /*
+                    document.getElementById('neighbourTable').style.display = 'none';
+                    */
+                    }
                     $.ajax({
                       url: './libs/php/getCountryNeighbours.php',
                       type: "POST",
@@ -351,11 +369,12 @@ $('#countryselect').change(function(){
                         value: borders
                       },
                     success:function(res){
-                
-                    
+                      console.log(res)
+                      
                         for (let i = 0; i < borders.length; i++){
-                         const a3 = res.data[i]
-                         
+                         const a3 = res.data[i].iso_a3;
+                         const borderName = res.data[i].name;
+  
                         
                            $.ajax({
                             url: './libs/php/getRestCountries.php',
@@ -367,14 +386,17 @@ $('#countryselect').change(function(){
                             success: function(result){  
                               
                              //this function is for the border flags to be displayed in the country information borders
-                              
+                              console.log(result)
                                 $("#bordersFullName").html(res["data"][i])
                                const bordercountry = res.data[i]
                                 var table = document.getElementById('bordertable')
                               var flag = result.data.flag
+                              console.log(bordercountry)
                              
+                            
+                            
                                 var row = `<tr>
-                                 <td class=countryneighbour>${bordercountry}</td><td><img src=${flag} style="width:60px;height:40px;float:right;"></td>
+                                 <td class=countryneighbour>${borderName}</td><td><img src=${flag} style="width:60px;height:40px;float:right;"></td>
                                 </tr>`
                                 table.innerHTML += row; 
     
@@ -383,6 +405,7 @@ $('#countryselect').change(function(){
                               console.log(error)
                             }
                           })
+                          
                           
                           $('#countryselect').change(function(){
                             $('#bordertable').empty();
@@ -399,7 +422,7 @@ $('#countryselect').change(function(){
                   })
                     
 
-                   
+                   /*
                    //AJAX call for getExchangeRates, commented out because I've run out of available API calls 
                     $.ajax({
                       url: './libs/php/getExchangeRates.php',
@@ -421,7 +444,7 @@ $('#countryselect').change(function(){
                       }
                       
                     })
-                  
+                  */
                              /*  commented out because I run out of monthly api requests
                       //AJAX call for the currency exhange from a given country to Euros
                     $.ajax({
@@ -493,7 +516,7 @@ $('#countryselect').change(function(){
                   }
                 })
 
-                
+                /*
                  // Using data retrieved from the result of the country select to retrieve national holiday data 
             $.ajax({
               url: 'libs/php/getNationalHolidays.php',
@@ -528,9 +551,9 @@ $('#countryselect').change(function(){
                 console.log(error)
               }
             })
-            
+            */
            
-            
+            /*
             //AJAX call to retrieve data from the news API 
             $.ajax({
             url: "libs/php/getNews.php",
@@ -563,6 +586,7 @@ $('#countryselect').change(function(){
                   </div>
                   <p class="mb-1">${description}</p>
                   <small>${author} - ${source}</small> - 
+                  
                   <small>${publishedAt}</small>
                 </a>`
                   const newsNoAuthor = `
@@ -613,10 +637,10 @@ $('#countryselect').change(function(){
               console.log(error)     
             }
           })  
-           
+           */
           
          
-          
+          /*
                   $.ajax({
                     url: 'libs/php/getCities.php',
                     type: 'POST',
@@ -818,7 +842,7 @@ $('#countryselect').change(function(){
                     error: function(error){
                       console.log(error)
                     }
-            })
+            })*/
           },
             error:function(error){
               console.log(error)
