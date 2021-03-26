@@ -512,7 +512,7 @@ $('#countryselect').change(function(){
                 const dateslice = holidaydate.slice(5)
                 var table = document.getElementById('holidayTable')
                 var row = `<tr>
-                <td>${holidayname}</td><td>${dateslice}</td>
+                <td class="holcol1">${holidayname}</td><td class="holcol2" >${dateslice}</td>
                 </tr>`
                 table.innerHTML += row;
                   
