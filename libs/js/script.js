@@ -1,4 +1,5 @@
 
+
 var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 });
@@ -309,7 +310,8 @@ $('#countryselect').change(function(){
                 const capital = result.data.capital;
                 const country = result.data.country;
                 let countryWiki = country.split(" ").join("_")
-                const wiki = 'https://en.wikipedia.org/wiki/';
+                const wiki = 'https://en.m.wikipedia.org/wiki/';
+                
                 const wikis =  wiki + countryWiki;
                 
                 $('.txtcountry').html(result['data']['country'])
