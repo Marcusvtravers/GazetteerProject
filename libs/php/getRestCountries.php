@@ -1,7 +1,7 @@
 <?php
 
 	$executionStartTime = microtime(true) / 1000;
-
+	
 	$url='https://restcountries.eu/rest/v2/alpha/' . $_REQUEST['countrycode'] . '/';
   
 	$ch = curl_init();
@@ -35,3 +35,4 @@
 	echo json_encode($output); 
 
 ?>
+

@@ -313,7 +313,14 @@ $('#countryselect').change(function(){
                 const wiki = 'https://en.m.wikipedia.org/wiki/';
                 
                 const wikis =  wiki + countryWiki;
-                
+                const population = result.data.population
+                const pop = population.replace(/,/g, '');
+                console.log(pop)
+                let popForCities = Math.floor(pop / 300);
+
+                console.log(popForCities)
+
+
                 $('.txtcountry').html(result['data']['country'])
                 $('.txtcapital').html(result['data']['capital'])
                 $('.txtpopulation').html(result['data']['population'])
@@ -328,7 +335,10 @@ $('#countryselect').change(function(){
                 let alpha3 = result.data.iso_a3
             
                 let alpha3lower = alpha3.toLowerCase()
-                
+
+
+
+
                 //AJAX call to retrieve data form the getRestCountries API 
                 $.ajax({
                   url: './libs/php/getRestCountries.php',
@@ -338,7 +348,7 @@ $('#countryselect').change(function(){
                     countrycode: alpha3lower
                   },
                   success: function(result){
-                    
+                    console.log(result)
                     let flagurl = result.data.flag
                     const currencycode = result.data.currency_code; 
                     $(".currencysymbol").html(result["currency_symbol"])
@@ -423,7 +433,7 @@ $('#countryselect').change(function(){
                     }
                   })
                     
-
+                  
                    
                    //AJAX call for getExchangeRates, commented out because I've run out of available API calls 
                     $.ajax({
@@ -447,7 +457,7 @@ $('#countryselect').change(function(){
                       
                     })
                   
-                         /*      commented out because I run out of monthly api requests
+                   
                       //AJAX call for the currency exhange from a given country to Euros
                     $.ajax({
                       url: 'libs/php/getEuroCurrency.php',
@@ -472,7 +482,7 @@ $('#countryselect').change(function(){
                           console.log(error)
                         }
                       })    
-                      */
+                      
                       
 
                     //AJAX call for the getWeather API 
@@ -648,11 +658,15 @@ $('#countryselect').change(function(){
                     type: 'POST',
                     dataType: 'JSON',
                     data: {
-                      iso_a2: val
+                      pop: popForCities,
+                      countryCode: bordercode
                     },
                     success: function(result){
-               
                       
+                      console.log(result)
+                 
+               
+        
                     let marker = L.marker();
                     let markers = L.markerClusterGroup();
 
