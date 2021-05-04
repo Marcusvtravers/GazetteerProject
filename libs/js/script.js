@@ -678,7 +678,7 @@ $('#countryselect').change(function(){
                         })
                       })
                     }
-                      for (let i = 0; i < result.length; i++){
+                      for (let i = 0; i < 10; i++){
 
                         let countryCodeforCity = result[i].countryCode;
                         if(val === countryCodeforCity){
@@ -688,7 +688,7 @@ $('#countryselect').change(function(){
                         let cityName = result[i].name;
                         let cityPop = result[i].population;
                         let cityWiki = cityName.split(" ").join("_")
-
+                          
                         $.ajax({
                           url: 'libs/php/getTimezone.php',
                           type: 'POST',
@@ -698,7 +698,7 @@ $('#countryselect').change(function(){
                             lng: markerLng
                           },
                           success: function(result){
-                            
+                            console.log(result)
                             let sunrise = result.data.sunrise;
                             let last5sunrise = sunrise.substr(sunrise.length - 5);
                             let sunset = result.data.sunset; 
@@ -774,6 +774,7 @@ $('#countryselect').change(function(){
 
                         
                         markers.on('click', function(e){
+                       
                           var lat = e.latlng.lat;
                           var lng = e.latlng.lng;
                           $.ajax({
@@ -785,7 +786,7 @@ $('#countryselect').change(function(){
                               lng: lng
                             },
                             success: function(result){
-                          
+                             console.log(result)
                               let sunrise = result.data.sunrise;
                               let last5sunrise = sunrise.substr(sunrise.length - 5);
                               let sunset = result.data.sunset; 
@@ -822,7 +823,7 @@ $('#countryselect').change(function(){
                               lngi: lng
                             },
                             success: function(result){
-                             
+                           console.log(result)
                             //Adding data retrieved from this API to HTML 
                             const icon = result.icon
                             const iconurl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
@@ -840,6 +841,7 @@ $('#countryselect').change(function(){
                               $('#tempmax').html(tempmaxround);
                               $('#tempmin').html(tempminround);
                               $('.windspeed').html(windspeed);
+                              
                             },
                             
                             error: function(error){
