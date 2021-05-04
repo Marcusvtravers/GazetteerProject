@@ -317,7 +317,7 @@ $('#countryselect').change(function(){
                 const population = result.data.population
                 const pop = population.replace(/,/g, '');
                 
-                let popForCities = Math.floor(pop / 300);
+                let popForCities = Math.floor(pop / 400);
 
                 
 
@@ -678,7 +678,7 @@ $('#countryselect').change(function(){
                         })
                       })
                     }
-                      for (let i = 0; i < 10; i++){
+                      for (let i = 0; i < result.length; i++){
 
                         let countryCodeforCity = result[i].countryCode;
                         if(val === countryCodeforCity){
@@ -698,7 +698,7 @@ $('#countryselect').change(function(){
                             lng: markerLng
                           },
                           success: function(result){
-                            console.log(result)
+                            
                             let sunrise = result.data.sunrise;
                             let last5sunrise = sunrise.substr(sunrise.length - 5);
                             let sunset = result.data.sunset; 
@@ -786,7 +786,7 @@ $('#countryselect').change(function(){
                               lng: lng
                             },
                             success: function(result){
-                             console.log(result)
+                            
                               let sunrise = result.data.sunrise;
                               let last5sunrise = sunrise.substr(sunrise.length - 5);
                               let sunset = result.data.sunset; 
@@ -823,7 +823,7 @@ $('#countryselect').change(function(){
                               lngi: lng
                             },
                             success: function(result){
-                           console.log(result)
+                           
                             //Adding data retrieved from this API to HTML 
                             const icon = result.icon
                             const iconurl = `http://openweathermap.org/img/wn/${icon}@2x.png`;

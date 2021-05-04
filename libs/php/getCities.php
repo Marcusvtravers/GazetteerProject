@@ -80,16 +80,29 @@ $decodehere = $decode['cities'];
 
 $count = count($decodehere);
 $cities = [];
+if ($count < 10){
+	for($x = 0; $x < $count; $x++){
+		$temp = null;
+		$temp['name'] = $decode['cities'][$x]['name'];
+		$temp['population'] = $decode['cities'][$x]['population'];
+		$temp['latitude'] = $decode['cities'][$x]['latitude'];
+		$temp['longitude'] = $decode['cities'][$x]['longitude'];
+		$temp['countryCode'] = $decode['country_code'];
+		array_push($cities, $temp);
+	}
+    } else {
+		for($x = 0; $x < 10; $x++){
+			$temp = null;
+			$temp['name'] = $decode['cities'][$x]['name'];
+			$temp['population'] = $decode['cities'][$x]['population'];
+			$temp['latitude'] = $decode['cities'][$x]['latitude'];
+			$temp['longitude'] = $decode['cities'][$x]['longitude'];
+			$temp['countryCode'] = $decode['country_code'];
+			array_push($cities, $temp);
+		}
+	}
 
-for($x = 0; $x < $count; $x++){
-	$temp = null;
-	$temp['name'] = $decode['cities'][$x]['name'];
-	$temp['population'] = $decode['cities'][$x]['population'];
-	$temp['latitude'] = $decode['cities'][$x]['latitude'];
-	$temp['longitude'] = $decode['cities'][$x]['longitude'];
-	$temp['countryCode'] = $decode['country_code'];
-	array_push($cities, $temp);
-}
+
 
 
 echo json_encode($cities);
