@@ -69,6 +69,7 @@ function success(pos) {
     },
     dataType: 'json',
     success:function(res){
+    
       const countrycode = res.data.countrycode.toUpperCase();
       $('#countryselect').val(countrycode).change();
       /*
@@ -109,7 +110,7 @@ $.fn.selectMenu = function(){
     type: 'GET',
     dataType: "JSON",
     success: function(result){
-    
+
       
       const select = document.getElementById('countryselect')
       for (let j = 0; j < result.data.length; j++){
@@ -242,7 +243,7 @@ $('#countryselect').change(function(){
           value: val
         },
         success: function(result){  
-
+ 
 
         const bordercode = result.data[0].properties.iso_a2
         const outline = result.data[0]
@@ -315,10 +316,10 @@ $('#countryselect').change(function(){
                 const wikis =  wiki + countryWiki;
                 const population = result.data.population
                 const pop = population.replace(/,/g, '');
-                console.log(pop)
+                
                 let popForCities = Math.floor(pop / 300);
 
-                console.log(popForCities)
+                
 
 
                 $('.txtcountry').html(result['data']['country'])
@@ -348,7 +349,7 @@ $('#countryselect').change(function(){
                     countrycode: alpha3lower
                   },
                   success: function(result){
-                    console.log(result)
+                    
                     let flagurl = result.data.flag
                     const currencycode = result.data.currency_code; 
                     $(".currencysymbol").html(result["currency_symbol"])
@@ -467,7 +468,7 @@ $('#countryselect').change(function(){
                         currency: currencycode
                       },
                       success: function(result){
-                        console.log(result)
+                       
                         const currency = result.data[currencycode]
                     
                         //Attaching and removinng the given currency when a new currency is clicked
@@ -495,7 +496,7 @@ $('#countryselect').change(function(){
                         q: `${capital},${bordercode}`
                       },
                       success: function(result){
-                        
+                       
                         let txttemp = Math.round(result.data.temp)
                         let tempmax = Math.round(result.data.temp_max)
                         let tempmin = Math.round(result.data.temp_min)
@@ -576,7 +577,7 @@ $('#countryselect').change(function(){
             },
             success: function(result){
                //looping though the data to retrieve the 4 latest news articles available from the API   
- 
+              
               for (let i = 0; i < 10; i++){
                 try{
                   
@@ -663,7 +664,7 @@ $('#countryselect').change(function(){
                     },
                     success: function(result){
                       
-                      console.log(result)
+                      
                  
                
         
@@ -784,7 +785,7 @@ $('#countryselect').change(function(){
                               lng: lng
                             },
                             success: function(result){
-
+                          
                               let sunrise = result.data.sunrise;
                               let last5sunrise = sunrise.substr(sunrise.length - 5);
                               let sunset = result.data.sunset; 
